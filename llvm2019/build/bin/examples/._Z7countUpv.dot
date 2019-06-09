@@ -1,0 +1,12 @@
+digraph "CFG for '_Z7countUpv' function" {
+	label="CFG for '_Z7countUpv' function";
+
+	Node0x55d048e99df0 [shape=record,label="{%0}"];
+	Node0x55d048e99df0 -> Node0x55d048e9a5f0;
+	Node0x55d048e9a5f0 [shape=record,label="{%2|{<s0>T|<s1>F}}"];
+	Node0x55d048e9a5f0:s0 -> Node0x55d048e9a820;
+	Node0x55d048e9a5f0:s1 -> Node0x55d048e9a870;
+	Node0x55d048e9a820 [shape=record,label="{%5}"];
+	Node0x55d048e9a820 -> Node0x55d048e9a5f0;
+	Node0x55d048e9a870 [shape=record,label="{%8}"];
+}

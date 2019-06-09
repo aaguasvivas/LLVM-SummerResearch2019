@@ -1,0 +1,5 @@
+digraph "CFG for '_Z7addFuncii' function" {
+	label="CFG for '_Z7addFuncii' function";
+
+	Node0x55d048e9ac80 [shape=record,label="{%2}"];
+}
