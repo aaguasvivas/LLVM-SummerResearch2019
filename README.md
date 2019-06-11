@@ -1,7 +1,40 @@
 # Using LLVM for Summer Research
 
-While working on LLVM, I used LLVM 8.0.0.
-
+**Requirements and Important Commands**
+* While working on LLVM, I used LLVM 8.0.0.
+* Emitting LLVMs intermediate form inside examples folder:
+    - ./../clang++ -S -emit-llvm hello.cp
+* Convert .ll to a .bc file:
+    - ./../llvm-as hello.ll
+* Compile our IR to assembly:
+    - ./../llc hello.bc
+* Optimizer:
+    -  ./../opt hello.ll
+* Run our first pass with opt on hello.bc:
+    - ./../opt -load ./../../lib/LLVMHello.so -hello < hello.bc
+* Second pass compile program to IR:
+    - ./../clang++ -S -emit-llvm loops.cpp
+    - Test opt with our old pass (note we can just use the .ll version for this sample)
+        - i. ./../opt -load ./../../lib/LLVMHello.so -hello < loops.ll > /dev/null
+    - Results of pass 2:
+        - ./../opt -load ./../../lib/LLVMHello.so -hello2 < loops.ll > /dev/null
+* Run third pass which gives you direct calls:
+    - ./../opt -load ./../../lib/LLVMHello.so -hello3 < loops.ll > /dev/null
+* Install a dot file viewer
+    - sudo apt install xdot (for linux)
+* Generate a dot file with
+    - ./../opt -dot-cfg-only loops.ll > /dev/null
+* View dot file with
+    - xdot example.dot
+* Create IR for instrumentation.cpp:
+    - ./../clang++ -S -emit-llvm instrumentation.cpp
+* Steps to running our module pass (Hello4)
+    - Get source code setup by running our pass in
+        - ./../opt -load ./../../lib/LLVMHello.so -hello -S hello.ll > readyToBeInstrumented.ll
+    - Link in our instrumentation:
+        - ./../llvm-link readyToBeInstrumented.ll instrumentation.ll -S -0 instrumentDemo.ll
+* Run our lined .ll file:
+    - ./../lli instrumentDemo.ll
 **Folders I worked on:**
 * llvm2019/build/bin/examples
 * llvm2019/build/lib/Transforms/Hello
